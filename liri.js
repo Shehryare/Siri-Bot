@@ -44,6 +44,34 @@ function spotifyThisSong(song){};
 
 var omdbKey = "5124890f";
 
-function omdb(movie){};
+function omdb(movie){
+    var omdbURL = 'http://www.omdbapi.com/?t=' + movie + '&apikey=' + omdbKey + '&plot=short&tomatoes=true';
 
-function doWhatItSays(){};
+    request(omdbURL, function(error, response, body){
+        if(!error && response.statusCode == 200){
+            var body = JSON.parse(body);
+            console.log("Title: " + body.Title);
+            console.log("Release Year: " + body.Year);
+            console.log("IMdB Rating: " + body.imdbRating);
+            console.log("Country: " + body.Country);
+            console.log("Language: " + body.Language);
+            console.log("Plot: " + body.Plot);
+            console.log("Actors: " + body.Actors);
+            console.log("Rotten Tomatoes Rating: " + body.tomatoRating);
+            console.log("Rotten Tomatoes URL: " + body.tomatoURL);
+        } else {
+            console.log('-----------Error------------')
+        }
+        
+        if(movie === "Mr. Nobody"){
+            console.log("-----------------------");
+        }
+    })
+};
+
+function doWhatItSays(){
+    fs.readFile('random.txt', "utf8", function(error, data){
+        var txt = data.split(',');
+        spotifyThisSong[1];
+    })
+};

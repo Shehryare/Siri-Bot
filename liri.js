@@ -3,15 +3,16 @@ var fs = require('fs');
 var Spotify = require('node-spotify-api');
 var keys = require("./keys.js");
 var request = require('request');
+var axios = require('axios');
+var moment = require('moment')
 
 
 
 var spotify = new Spotify(keys.spotify);
-var omdbKey = keys.omdb.api_key;
 var bandsInTown = keys.bandsInTown
 
 var command = process.argv[2];
-var userInput = process.argv[3];
+var userInput = process.argv.slice(3).join(" ");
 
 switch (command){
     case ('spotify-this-song'):
@@ -28,7 +29,14 @@ switch (command){
             omdb('Mr. Nobody.');
         }
     break;
-    case ('do-what-it-says '):
+    case ('concert-this'):
+            if(userInput){
+                concert(userInput)
+            } else {
+                concert('Mr. Nobody.');
+            }
+        break;
+    case ('do-what-it-says'):
             doWhatItSays()
     break;
     default:
@@ -40,13 +48,29 @@ switch (command){
 
 
 
-function spotifyThisSong(song){};
+function spotifyThisSong(song){
+    spotify.search({ type: 'track', query: song }, function(err, data) {
+        if (err) {
+          return console.log('Error occurred: ' + err);
+        }
+       
+      console.log("Artist: " + data.tracks.items[0].album.artists[0].name);
+      console.log("Album: " + data.tracks.items[0].album.name);
+        console.log("Release Date: " + data.tracks.items[0].album.release_date);
 
-var omdbKey = "5124890f";
+ 
+      });
+};
+
+function concert(concert){
+
+}
+
+
+var omdbKey = "trilogy";
 
 function omdb(movie){
     var omdbURL = 'http://www.omdbapi.com/?t=' + movie + '&apikey=' + omdbKey + '&plot=short&tomatoes=true';
-
     request(omdbURL, function(error, response, body){
         if(!error && response.statusCode == 200){
             var body = JSON.parse(body);
@@ -60,6 +84,7 @@ function omdb(movie){
             console.log("Rotten Tomatoes Rating: " + body.tomatoRating);
             console.log("Rotten Tomatoes URL: " + body.tomatoURL);
         } else {
+            console.log(body);
             console.log('-----------Error------------')
         }
         
@@ -72,6 +97,7 @@ function omdb(movie){
 function doWhatItSays(){
     fs.readFile('random.txt', "utf8", function(error, data){
         var txt = data.split(',');
-        spotifyThisSong[1];
+        spotifyThisSong(txt[1]);
+        return txt;
     })
 };

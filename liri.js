@@ -66,10 +66,11 @@ function spotifyThisSong(song){
 //function for concert API
 function concert(concert){
 //bands in town API was not avalible but here is my take at working logic. 
-var bandsFakeAPI = "13722599";
-var bandsInTownURL = "http://www.bandsintown.com/event/13722599?app_id=" + bandsFakeAPI + concert;
-axios.get(bandsInTownURL).then(function(response) { //axios method to gather bands in town URL.
-    var concertData = response.data
+let bandsFakeAPI = "13722599";
+let bandsInTownURL = "http://www.bandsintown.com/event/13722599?app_id=" + bandsFakeAPI + concert;
+axios.get(bandsInTownURL).then((response) => { //axios method to gather bands in town URL.
+    console.log(response)
+    let concertData = response.data
     console.log(concertData)
 }
 )}

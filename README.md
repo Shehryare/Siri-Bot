@@ -3,7 +3,9 @@
 ## This command line application is designed to take information from 3 APIS:
 
  Spotify API
+ 
  Bands in Town API
+ 
  OMBD API
 
 These APIS are installed using npm install X (X = Name of module)

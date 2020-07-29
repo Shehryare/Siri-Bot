@@ -1,4 +1,4 @@
-# Liri-Bot- Command line Applicaton 
+# Siri Bot Command line Applicaton 
 
 # This command line application is designed to take information from 3 APIS:
 -Spotify API
